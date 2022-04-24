@@ -1,0 +1,22 @@
+{
+  "name": "@alantoa/tab-view-example",
+  "displayName": "TabView Example",
+  "expo": {
+    "name": "@alantoa/tab-view-example",
+    "slug": "alantoa-tab-view-example",
+    "description": "Example app for @alantoa/tab-view",
+    "privacy": "public",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
