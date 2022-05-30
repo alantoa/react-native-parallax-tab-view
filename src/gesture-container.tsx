@@ -334,7 +334,7 @@ export const GestureContainer = React.forwardRef<
         const height = event.nativeEvent.layout.height - overflowHeight;
         setHeaderHeight(height);
         if (animationHeaderHeight) {
-          animationHeaderHeight.value = calcHeight - minHeaderHeight;
+          animationHeaderHeight.value = Math.abs(calcHeight - minHeaderHeight);
         }
       },
       [headerHeight]
