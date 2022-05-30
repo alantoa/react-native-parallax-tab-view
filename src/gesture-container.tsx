@@ -84,7 +84,7 @@ export const GestureContainer = React.forwardRef<
     const tabsRefreshTrans = useSharedValue(refreshHeight);
     const isRefreshing = useSharedValue(false);
     const isStartRefreshing = useSharedValue(false);
-    const tabsIsRefreshingWithAnimation = useSharedValue(false);
+    const isRefreshingWithAnimation = useSharedValue(false);
     const basyY = useSharedValue(0);
     const startY = useSharedValue(0);
     const headerTransStartY = useSharedValue(0);
@@ -106,7 +106,7 @@ export const GestureContainer = React.forwardRef<
           animateToRefresh({
             transRefreshing: tabsRefreshTrans,
             isRefreshing: isRefreshing,
-            isRefreshingWithAnimation: tabsIsRefreshingWithAnimation,
+            isRefreshingWithAnimation: isRefreshingWithAnimation,
             destPoi: 0,
             isToRefresh,
             onStartRefresh,
@@ -119,7 +119,7 @@ export const GestureContainer = React.forwardRef<
           animateToRefresh({
             transRefreshing: tabsRefreshTrans,
             isRefreshing: isRefreshing,
-            isRefreshingWithAnimation: tabsIsRefreshingWithAnimation,
+            isRefreshingWithAnimation: isRefreshingWithAnimation,
             destPoi,
             isToRefresh,
           });
@@ -236,7 +236,7 @@ export const GestureContainer = React.forwardRef<
             );
           }
         };
-        if (isRefreshing.value !== tabsIsRefreshingWithAnimation.value) return;
+        if (isRefreshing.value !== isRefreshingWithAnimation.value) return;
         if (isRefreshing.value) {
           if (isDragging.value === false) {
             const starty = onReadyToActive(false);
@@ -268,7 +268,7 @@ export const GestureContainer = React.forwardRef<
         if (!sceneIsReady.value[curIndexValue.value] || !onStartRefresh) return;
         if (isDragging.value === false) return;
         isDragging.value = false;
-        if (isRefreshing.value !== tabsIsRefreshingWithAnimation.value) return;
+        if (isRefreshing.value !== isRefreshingWithAnimation.value) return;
         if (isRefreshing.value) {
           startY.value = 0;
           tabsRefreshTrans.value = withDecay(
@@ -309,7 +309,7 @@ export const GestureContainer = React.forwardRef<
           refreshValue={tabsTrans}
           opacityValue={opacityValue}
           isRefreshing={isRefreshing}
-          isRefreshingWithAnimation={tabsIsRefreshingWithAnimation}
+          isRefreshingWithAnimation={isRefreshingWithAnimation}
           pullExtendedCoefficient={pullExtendedCoefficient}
           renderContent={_renderRefreshControl}
         />
@@ -374,7 +374,7 @@ export const GestureContainer = React.forwardRef<
       () => {
         return (
           tabsRefreshTrans.value > refreshHeight &&
-          tabsIsRefreshingWithAnimation.value
+          isRefreshingWithAnimation.value
         );
       },
       (isStart) => {
@@ -388,7 +388,7 @@ export const GestureContainer = React.forwardRef<
       [
         tabsRefreshTrans,
         curIndexValue,
-        tabsIsRefreshingWithAnimation,
+        isRefreshingWithAnimation,
         childScrollRef,
         refreshHeight,
       ]
@@ -430,7 +430,7 @@ export const GestureContainer = React.forwardRef<
       () => {
         return (
           tabsRefreshTrans.value > refreshHeight &&
-          tabsIsRefreshingWithAnimation.value
+          isRefreshingWithAnimation.value
         );
       },
       (isStart) => {
@@ -444,7 +444,7 @@ export const GestureContainer = React.forwardRef<
       [
         tabsRefreshTrans,
         curIndexValue,
-        tabsIsRefreshingWithAnimation,
+        isRefreshingWithAnimation,
         childScrollRef,
         refreshHeight,
       ]
@@ -458,7 +458,7 @@ export const GestureContainer = React.forwardRef<
           tabsRefreshTrans.value < refreshHeight &&
           shareAnimatedValue.value !== 0 &&
           dragIndex.value === curIndexValue.value &&
-          (isDragging.value || tabsIsRefreshingWithAnimation.value)
+          (isDragging.value || isRefreshingWithAnimation.value)
         );
       },
       (isStart) => {
@@ -474,7 +474,7 @@ export const GestureContainer = React.forwardRef<
         onStartRefresh,
         curIndexValue,
         isDragging,
-        tabsIsRefreshingWithAnimation,
+        isRefreshingWithAnimation,
         childScrollRef,
       ]
     );
