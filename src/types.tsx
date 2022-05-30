@@ -3,7 +3,11 @@ import type { ComponentClass } from 'react';
 import type { ScrollViewProps } from 'react-native';
 import type { NativeGesture } from 'react-native-gesture-handler';
 import type Animated from 'react-native-reanimated';
+import type { Route as TabViewRoute } from 'react-native-tab-view';
 
+export type Route = TabViewRoute & {
+  index: number;
+};
 // eslint-disable-next-line no-shadow
 export enum RefreshTypeEnum {
   Idle,

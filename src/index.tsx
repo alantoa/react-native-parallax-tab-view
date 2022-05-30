@@ -7,6 +7,10 @@ import { FlatList, ScrollView, SectionList } from 'react-native';
 import { TabView } from 'react-native-tab-view';
 import { createCollapsibleScrollView } from './create-collapsible-scrollView';
 import { createHeaderTabsComponent } from './create-header-tabs';
+import type { Route } from './types';
+
+export * from './create-collapsible-scrollView';
+export * from './create-header-tabs';
 
 export const TabScrollView = createCollapsibleScrollView<
   typeof ScrollView,
@@ -23,4 +27,4 @@ export const TabSectionList = createCollapsibleScrollView<
   SectionListProps<any>
 >(SectionList);
 
-export const HeaderTabView = createHeaderTabsComponent(TabView);
+export const HeaderTabView = createHeaderTabsComponent<Route>(TabView);
