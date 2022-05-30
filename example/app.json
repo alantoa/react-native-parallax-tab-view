@@ -1,22 +1,36 @@
 {
-  "name": "@alantoa/tab-view-example",
-  "displayName": "TabView Example",
   "expo": {
-    "name": "@alantoa/tab-view-example",
-    "slug": "alantoa-tab-view-example",
-    "description": "Example app for @alantoa/tab-view",
-    "privacy": "public",
+    "name": "example",
+    "slug": "example",
+    "jsEngine": "hermes",
     "version": "1.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "ios": {
-      "supportsTablet": true
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.tabview.example"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "alantoa.tabview.example"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
   }
 }

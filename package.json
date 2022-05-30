@@ -1,7 +1,7 @@
 {
   "name": "@alantoa/tab-view",
   "version": "0.1.0",
-  "description": "react native tab view",
+  "description": "react native parallax tab view",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
@@ -48,11 +48,10 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^11.0.0",
-    "@react-native-community/eslint-config": "^2.0.0",
+    "@react-native-community/eslint-config": "^3.0.1",
     "@release-it/conventional-changelog": "^2.0.0",
     "@types/jest": "^26.0.0",
-    "@types/react": "^16.9.19",
-    "@types/react-native": "0.62.13",
+    "@types/react-native": "^0.67.6",
     "commitlint": "^11.0.0",
     "eslint": "^7.2.0",
     "eslint-config-prettier": "^7.0.0",
@@ -61,15 +60,25 @@
     "jest": "^26.0.1",
     "pod-install": "^0.1.0",
     "prettier": "^2.0.5",
-    "react": "16.13.1",
-    "react-native": "0.63.4",
+    "react": "17.0.2",
+    "react-native": "^0.68.2",
     "react-native-builder-bob": "^0.18.2",
+    "react-native-gesture-handler": "^2.4.2",
+    "react-native-reanimated": "~2.8.0",
     "release-it": "^14.2.2",
     "typescript": "^4.1.3"
   },
+  "resolutions": {
+    "@types/react": "~17.0.21"
+  },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-gesture-handler": "*",
+    "react-native-pager-view": ">=5.0.0",
+    "react-native-reanimated": ">=2.0.0",
+    "react-native-tab-view": ">=3.0.0",
+    "react-stickynode": "*"
   },
   "jest": {
     "preset": "react-native",
@@ -143,5 +152,13 @@
         }
       ]
     ]
+  },
+  "dependencies": {
+    "@types/react-stickynode": "^4.0.0",
+    "react-dom": "^18.1.0",
+    "react-native-pager-view": "^5.4.24",
+    "react-native-tab-view": "^3.1.1",
+    "react-native-web": "^0.17.7",
+    "react-stickynode": "^4.0.0"
   }
 }

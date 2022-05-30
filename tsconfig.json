@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@alantoa/tab-view": ["./src/index"]
+      "@alantoa/tab-view": ["./src/index"],
+      "@alantoa/tab-view/v1": ["./src/v1/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
