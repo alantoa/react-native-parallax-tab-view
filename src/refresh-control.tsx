@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { ActivityIndicator, StyleSheet, TextInput } from 'react-native';
 import Animated, {
   createAnimatedPropAdapter,
@@ -11,7 +11,7 @@ import Animated, {
 import { useRefreshDerivedValue } from './hooks';
 import { RefreshControlProps, RefreshTypeEnum } from './types';
 
-interface RefreshControlContainerProps {
+type RefreshControlContainerProps = {
   top: number;
   refreshHeight: number;
   overflowPull: number;
@@ -21,7 +21,8 @@ interface RefreshControlContainerProps {
   isRefreshingWithAnimation: Animated.SharedValue<boolean>;
   pullExtendedCoefficient: number;
   renderContent?: (refreshProps: RefreshControlProps) => React.ReactElement;
-}
+  refreshControlColor?: string;
+};
 
 const RefreshControlContainer: React.FC<RefreshControlContainerProps> = ({
   top,
@@ -33,6 +34,7 @@ const RefreshControlContainer: React.FC<RefreshControlContainerProps> = ({
   isRefreshingWithAnimation,
   pullExtendedCoefficient,
   renderContent,
+  refreshControlColor = '#999999',
 }) => {
   const refreshType = useSharedValue<RefreshTypeEnum>(RefreshTypeEnum.Idle);
   const progress = useDerivedValue(() => {
@@ -88,7 +90,12 @@ const RefreshControlContainer: React.FC<RefreshControlContainerProps> = ({
     if (renderContent) {
       return React.cloneElement(renderContent(_props), makeChildProps());
     }
-    return <RefreshControlNormal {..._props} />;
+    return (
+      <RefreshControlNormal
+        {..._props}
+        refreshControlColor={refreshControlColor}
+      />
+    );
   };
 
   const makeChildProps = () => {
@@ -125,30 +132,32 @@ const TextInputAdapter = createAnimatedPropAdapter(
   },
   ['text']
 );
-const RefreshControlNormal: React.FC<RefreshControlProps> = ({ progress }) => {
-  const textInputProps = useAnimatedProps(
-    () => {
-      return {
-        value: Math.round(progress.value * 100) + '%',
-      };
-    },
-    null,
-    [TextInputAdapter]
-  );
+const RefreshControlNormal = memo<RefreshControlProps>(
+  function RefreshControlNormal({ progress, refreshControlColor }) {
+    const textInputProps = useAnimatedProps(
+      () => {
+        return {
+          value: Math.round(progress.value * 100) + '%',
+        };
+      },
+      null,
+      [TextInputAdapter]
+    );
 
-  return (
-    <Animated.View style={styles.baseControl}>
-      <ActivityIndicator color={'#26323F'} />
-      <AnimatedText
-        allowFontScaling={false}
-        caretHidden
-        editable={false}
-        animatedProps={textInputProps}
-        style={styles.textStyle}
-      />
-    </Animated.View>
-  );
-};
+    return (
+      <Animated.View style={styles.baseControl}>
+        <ActivityIndicator color={refreshControlColor} />
+        <AnimatedText
+          allowFontScaling={false}
+          caretHidden
+          editable={false}
+          animatedProps={textInputProps}
+          style={[styles.textStyle, { color: refreshControlColor }]}
+        />
+      </Animated.View>
+    );
+  }
+);
 
 const styles = StyleSheet.create({
   baseControl: {
@@ -164,10 +173,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   textStyle: {
-    color: '#26323F',
-    marginTop: 5,
-    fontSize: 17,
-    width: 100,
+    marginTop: 4,
+    fontSize: 13,
     textAlign: 'center',
   },
 });

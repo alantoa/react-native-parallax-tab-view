@@ -40,6 +40,8 @@ export type CollapsibleHeaderProps = {
   animationHeaderPosition?: Animated.SharedValue<number>;
   animationHeaderHeight?: Animated.SharedValue<number>;
   panHeaderMaxOffset?: number;
+  onPullEnough?: () => void;
+  refreshControlColor?: string;
 };
 
 export type GestureContainerProps = CollapsibleHeaderProps & {
@@ -51,6 +53,7 @@ export interface RefreshControlProps {
   refreshValue: Animated.SharedValue<number>;
   refreshType: Animated.SharedValue<RefreshTypeEnum>;
   progress: Animated.SharedValue<number>;
+  refreshControlColor?: string;
 }
 
 export type SceneProps<P extends object> = {
