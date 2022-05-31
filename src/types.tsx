@@ -2,6 +2,7 @@ import type React from 'react';
 import type { ComponentClass } from 'react';
 import type { ScrollViewProps } from 'react-native';
 import type { NativeGesture } from 'react-native-gesture-handler';
+import type { GestureRef } from 'react-native-gesture-handler/lib/typescript/handlers/gestures/gesture';
 import type Animated from 'react-native-reanimated';
 import type { Route as TabViewRoute } from 'react-native-tab-view';
 
@@ -20,7 +21,10 @@ export enum RefreshTypeEnum {
 
 export type CollapsibleHeaderProps = {
   initHeaderHeight?: number;
-  renderScrollHeader: () => React.ReactElement | null;
+  renderScrollHeader: () =>
+    | React.ComponentType<any>
+    | React.ReactElement
+    | null;
   initTabbarHeight?: number;
   minHeaderHeight?: number;
   overflowHeight?: number;
@@ -39,6 +43,7 @@ export type CollapsibleHeaderProps = {
   panHeaderMaxOffset?: number;
   onPullEnough?: () => void;
   refreshControlColor?: string;
+  headerSimultaneousWithExternalGesture?: Exclude<GestureRef, number>[];
 };
 
 export type GestureContainerProps = CollapsibleHeaderProps & {
