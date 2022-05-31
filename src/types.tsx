@@ -20,10 +20,7 @@ export enum RefreshTypeEnum {
 
 export type CollapsibleHeaderProps = {
   initHeaderHeight?: number;
-  renderScrollHeader: () =>
-    | React.ComponentType<any>
-    | React.ReactElement
-    | null;
+  renderScrollHeader: () => React.ReactElement | null;
   initTabbarHeight?: number;
   minHeaderHeight?: number;
   overflowHeight?: number;

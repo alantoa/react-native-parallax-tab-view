@@ -30,6 +30,7 @@ import { useRefreshDerivedValue, useSceneInfo } from './hooks';
 import RefreshControlContainer from './refresh-control';
 import type { GestureContainerProps } from './types';
 import { animateToRefresh, mScrollTo } from './utils';
+
 const { width } = Dimensions.get('window');
 
 export type GestureContainerRef = {
@@ -184,7 +185,11 @@ export const GestureContainer = React.forwardRef<
       headerTrans.value = withDecay(
         {
           velocity: -event.velocityY,
-          clamp: [0, panHeaderMaxOffset ?? headerHeight],
+          clamp: [
+            0,
+            panHeaderMaxOffset ??
+              headerHeight - minHeaderHeight + overflowHeight,
+          ],
         },
         () => {
           isSlidingHeader.value = false;
@@ -539,11 +544,9 @@ export const GestureContainer = React.forwardRef<
       <Animated.View style={[styles.tabbarStyle, tabbarAnimateStyle]}>
         <GestureDetector gesture={gestureHandlerHeader}>
           <Animated.View style={styles.container}>
-            <View onLayout={headerOnLayout}>
-              {React.isValidElement(renderScrollHeader)
-                ? renderScrollHeader
-                : renderScrollHeader()}
-            </View>
+            {renderScrollHeader && (
+              <View onLayout={headerOnLayout}>{renderScrollHeader()}</View>
+            )}
 
             <Animated.View
               style={{ transform: [{ translateY: -overflowHeight }] }}
