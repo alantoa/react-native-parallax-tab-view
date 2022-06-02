@@ -4,7 +4,7 @@ import type {
   SectionListProps,
 } from 'react-native';
 import { FlatList, ScrollView, SectionList } from 'react-native';
-import { TabView } from 'react-native-tab-view';
+import { TabView } from 'react-native-tab-view/src';
 import { createCollapsibleScrollView } from './create-collapsible-scrollView';
 import { createHeaderTabsComponent } from './create-header-tabs';
 import type { Route } from './types';

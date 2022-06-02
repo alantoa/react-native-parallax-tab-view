@@ -61,6 +61,7 @@ export const GestureContainer = React.forwardRef<
     onPullEnough,
     refreshControlColor,
     headerSimultaneousWithExternalGesture = [],
+    refreshControlTop = 0,
   },
   forwardedRef
 ) {
@@ -317,7 +318,7 @@ export const GestureContainer = React.forwardRef<
     if (!onStartRefresh) return;
     return (
       <RefreshControlContainer
-        top={0}
+        top={refreshControlTop}
         refreshHeight={refreshHeight}
         overflowPull={overflowPull}
         refreshValue={tabsTrans}

@@ -4,7 +4,7 @@ import type { ScrollViewProps } from 'react-native';
 import type { NativeGesture } from 'react-native-gesture-handler';
 import type { GestureRef } from 'react-native-gesture-handler/lib/typescript/handlers/gestures/gesture';
 import type Animated from 'react-native-reanimated';
-import type { Route as TabViewRoute } from 'react-native-tab-view';
+import type { Route as TabViewRoute } from 'react-native-tab-view/src';
 
 export type Route = TabViewRoute & {
   index: number;
@@ -44,6 +44,7 @@ export type CollapsibleHeaderProps = {
   onPullEnough?: () => void;
   refreshControlColor?: string;
   headerSimultaneousWithExternalGesture?: Exclude<GestureRef, number>[];
+  refreshControlTop?: number;
 };
 
 export type GestureContainerProps = CollapsibleHeaderProps & {

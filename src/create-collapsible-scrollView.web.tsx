@@ -1,14 +1,12 @@
 import type { ComponentClass } from 'react';
-import React, { useCallback, useEffect, useMemo } from 'react';
-import { LayoutChangeEvent, ScrollViewProps, StyleSheet } from 'react-native';
+import React, { useEffect, useMemo } from 'react';
+import { ScrollViewProps, StyleSheet } from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
-  useAnimatedStyle,
   useSharedValue,
-  withTiming,
 } from 'react-native-reanimated';
 import { useHeaderTabContext } from './context';
-import { useSharedScrollableRef, useSyncInitialPosition } from './hooks';
+import { useSharedScrollableRef } from './hooks';
 import type { SceneProps } from './types';
 
 export function createCollapsibleScrollView<
@@ -38,7 +36,6 @@ function SceneComponent<P extends ScrollViewProps>({
   contentContainerStyle,
   scrollIndicatorInsets,
   forwardedRef,
-  onLayout,
   ...restProps
 }: SceneProps<P>) {
   if (onScroll !== undefined) {
@@ -57,8 +54,6 @@ function SceneComponent<P extends ScrollViewProps>({
     useSharedScrollableRef<Animated.ScrollView>(forwardedRef);
 
   const scrollY = useSharedValue(0);
-  const { opacityValue, initialPosition } =
-    useSyncInitialPosition(scollViewRef);
 
   const calcHeight = useMemo(() => {
     return tabbarHeight + headerHeight;
@@ -82,20 +77,9 @@ function SceneComponent<P extends ScrollViewProps>({
       });
     }
   }, [scollViewRef, index, scrollY, updateSceneInfo]);
-  const _onLayout = useCallback(
-    (e: LayoutChangeEvent) => {
-      onLayout?.(e);
-      initialPosition(shareAnimatedValue.value);
-    },
-    [initialPosition, onLayout, shareAnimatedValue.value]
-  );
-  const sceneStyle = useAnimatedStyle(() => {
-    return {
-      opacity: withTiming(opacityValue.value),
-    };
-  }, [opacityValue]);
+
   return (
-    <Animated.View style={[styles.container, sceneStyle]}>
+    <Animated.View style={styles.container}>
       {/* @ts-ignore */}
       <ContainerView
         ref={scollViewRef}
@@ -107,7 +91,6 @@ function SceneComponent<P extends ScrollViewProps>({
           },
           contentContainerStyle,
         ]}
-        onLayout={_onLayout}
         onScroll={onScrollAnimateEvent}
         scrollIndicatorInsets={{
           top: headerHeight,
