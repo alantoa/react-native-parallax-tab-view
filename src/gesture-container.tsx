@@ -237,7 +237,12 @@ export const GestureContainer = React.forwardRef<
       isPullEnough.value = false;
     })
     .onUpdate((event) => {
-      if (!sceneIsReady.value[curIndexValue.value] || !onStartRefresh) return;
+      if (
+        !sceneIsReady.value[curIndexValue.value] ||
+        !onStartRefresh ||
+        childScrollYTrans[curIndexValue.value]?.value === undefined
+      )
+        return;
       const onReadyToActive = (isPulling: boolean) => {
         dragIndex.value = curIndexValue.value;
         if (isPulling) {

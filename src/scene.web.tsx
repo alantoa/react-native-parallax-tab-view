@@ -1,4 +1,3 @@
-import type { ComponentClass } from 'react';
 import React, { useEffect, useMemo } from 'react';
 import { ScrollViewProps, StyleSheet } from 'react-native';
 import Animated, {
@@ -9,27 +8,7 @@ import { useHeaderTabContext } from './context';
 import { useSharedScrollableRef } from './hooks';
 import type { SceneProps } from './types';
 
-export function createCollapsibleScrollView<
-  P extends ComponentClass<any>,
-  T = any
->(Component: P) {
-  const AnimatePageView = Animated.createAnimatedComponent(Component);
-  return React.forwardRef<
-    P,
-    T & {
-      index: number;
-    }
-  >(function tabView(props, ref) {
-    return (
-      <SceneComponent
-        {...props}
-        forwardedRef={ref}
-        ContainerView={AnimatePageView}
-      />
-    );
-  });
-}
-function SceneComponent<P extends ScrollViewProps>({
+export function SceneComponent<P extends ScrollViewProps>({
   index,
   onScroll,
   ContainerView,
@@ -56,8 +35,8 @@ function SceneComponent<P extends ScrollViewProps>({
   const scrollY = useSharedValue(0);
 
   const calcHeight = useMemo(() => {
-    return tabbarHeight + headerHeight;
-  }, [tabbarHeight, headerHeight]);
+    return tabbarHeight;
+  }, [tabbarHeight]);
 
   const onScrollAnimateEvent = useAnimatedScrollHandler({
     onScroll: (e) => {

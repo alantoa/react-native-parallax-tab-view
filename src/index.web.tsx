@@ -146,16 +146,9 @@ function CollapsibleHeaderTabView<T extends Route>(
   const _renderTabBarContainer = (children: React.ReactElement) => {
     return (
       <View style={styles.tabbarStyle}>
-        <View style={styles.container}>
-          <View onLayout={headerOnLayout}>
-            {React.isValidElement(renderScrollHeader)
-              ? renderScrollHeader
-              : renderScrollHeader()}
-          </View>
-          <Sticky enabled={true} top={0}>
-            <View onLayout={tabbarOnLayout}>{children}</View>
-          </Sticky>
-        </View>
+        <Sticky enabled={true} top={minHeaderHeight}>
+          <View onLayout={tabbarOnLayout}>{children}</View>
+        </Sticky>
       </View>
     );
   };
@@ -184,6 +177,9 @@ function CollapsibleHeaderTabView<T extends Route>(
     >
       <View style={styles.container}>
         <View style={styles.container} onLayout={containerOnLayout}>
+          {renderScrollHeader && (
+            <View onLayout={headerOnLayout}>{renderScrollHeader()}</View>
+          )}
           {renderTabView({
             renderTabBarContainer: _renderTabBarContainer,
           })}
@@ -196,7 +192,6 @@ function CollapsibleHeaderTabView<T extends Route>(
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    overflow: 'hidden',
   },
   tabbarStyle: {
     left: 0,
